@@ -3,7 +3,12 @@ const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 router.get('/', (req, res) => {
-  Category.findAll({}).then(results => {
+  Category.findAll({
+    include: {
+      model: Product,
+      attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
+    }
+  }).then(results => {
     res.json(results)
   })
 });
@@ -12,6 +17,10 @@ router.get('/:id', (req, res) => {
   Category.findOne({
     where: {
       id: req.params.id
+    },
+    include: {
+      model: Product,
+      attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
     }
   })
   .then(results => {
@@ -21,8 +30,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   Category.create({
-    id: req.params.id,
-    category_name: req.params.category_name
+    category_name: req.body.category_name
   })
   .then(results => {
     res.json(results)
@@ -30,10 +38,9 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  Category.update({
+  Category.update(req.body, {
     where: {
       id: req.params.id,
-      category_name: req.params.category_name
     }
   })
   .then(results => {
