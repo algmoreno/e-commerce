@@ -12,3 +12,8 @@ A few errors show when testing some of the put and delete routes but nevertheles
 the intended data. 
 
 The database name, username and password are all safely stored in environment variables and exluded from the respository along with the node modules. 
+
+## Links 
+
+Github: https://github.com/algmoreno/e-commerce 
+Walkthrough: https://drive.google.com/file/d/1VPWz9AZCs4XlggozxGUGBwvj2XMSdcLI/view
